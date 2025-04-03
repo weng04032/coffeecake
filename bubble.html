@@ -27,7 +27,7 @@
             margin-top: 50px;
             opacity: 0;
             animation: fadeIn 2s forwards;
-            z-index: 1;
+            z-index: 2; /* 提高這個層級，讓它顯示在蛋糕圖文框上面 */
             position: relative;
             padding-bottom: 100px; /* 增加下方空間，避免按鈕被遮擋 */
         }
@@ -48,7 +48,7 @@
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s, transform 0.3s;
-            z-index: 2; /* 確保按鈕層級在其他內容之上 */
+            z-index: 3; /* 確保按鈕層級在其他內容之上 */
             position: absolute; /* 使用絕對定位確保按鈕固定 */
             bottom: 20px; /* 固定按鈕距離頁面底部的距離 */
             left: 50%;
@@ -71,17 +71,18 @@
             justify-content: center;
             pointer-events: none;
             opacity: 0.6;
-            z-index: 0;
+            z-index: 1; /* 調整泡泡的層級，確保它在背景 */
         }
 
         .bubbles img {
             width: 100px;
-            height: 60px;
+            height: 50px;
             margin: 10px;
-            animation: bubbleMovement 4s ease-in-out infinite, bubbleFloat 8s ease-in-out infinite, bubbleRotation 12s linear infinite;
+            animation: bubbleMovement 8s ease-in-out infinite, bubbleFloat 8s ease-in-out infinite, bubbleRotation 12s linear infinite;
         }
-          /* 自訂泡泡動畫效果 */
-          @keyframes bubbleMovement {
+
+        /* 自訂泡泡動畫效果 */
+        @keyframes bubbleMovement {
             0% {
                 transform: translateY(0) scale(1);
                 opacity: 1;
@@ -97,10 +98,10 @@
                 transform: translateX(0); /* 初始位置 */
             }
             50% {
-                transform: translateX(-20px); /* 向左漂浮 */
+                transform: translateX(-50px); /* 向左漂浮 */
             }
             100% {
-                transform: translateX(80px); /* 向右漂浮 */
+                transform: translateX(50px); /* 向右漂浮 */
             }
         }
 
@@ -118,15 +119,15 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #fff;
-            border-radius: 10px;
+            background-color: #ffffff;
+            border-radius: 20px;
             width: 80%;
             margin: 40px auto;
             padding: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.841);
             transition: transform 0.3s ease-in-out;
             position: relative;
-            z-index: 2; /* 确保蛋糕框在其他内容之上 */
+            z-index: 1; /* 調整蛋糕框的層級，讓它位於按鈕和內容之下 */
         }
 
         .cake-box:hover {
@@ -142,8 +143,8 @@
         }
 
         .cake-description {
-            font-size: 18px;
-            color: #333;
+            font-size: 16px;
+            color: #613401;
             line-height: 1.5;
             max-width: 500px;
         }
@@ -205,7 +206,7 @@
 
             /* 改變手機版背景顏色 */
             body {
-                background-color: #c38902; /* 更改為手機版背景顏色 */
+                background-color: #e9ac05; /* 更改為手機版背景顏色 */
             }
         }
 
@@ -241,8 +242,8 @@
         <img src="images/lemon cake.png" alt="蛋糕圖片" class="cake-image">
         <div class="cake-description">
             <h3>輕檸蛋糕</h3>
-            <p>檸檬蛋糕起源於南法小鎮『蒙頓』<br>採用新鮮檸檬、日本三溫糖，可增加蛋糕體的保濕性、口感濕潤綿密~
-                <br>層層驚喜、層層美味，每一口~都充滿幸福感。</p>
+            <p>檸檬蛋糕起源於南法小鎮『蒙頓』<br>採用新鮮檸檬、日本三溫糖、法國奶油，<br>可增加蛋糕體的保濕性、口感濕潤綿密~
+                <br>層層驚喜，層層美味，每一口~都充滿幸福感。</p>
         </div>
     </div>
 </body>
