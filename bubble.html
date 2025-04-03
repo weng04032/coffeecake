@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>咖啡美寓</title>
+    
+    <!-- 連接CSS -->
+    <link rel="stylesheet" href="bubble.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            overflow: hidden; /* 防止出現滾動條 */
+            background-color: #f7f7f7;
+        }
+
+        /* 內容區域 */
+        .content {
+            text-align: center;
+            margin-top: 50px;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+            z-index: 1;
+            position: relative;
+            padding-bottom: 100px; /* 增加下方空間，避免按鈕被遮擋 */
+        }
+
+        h4 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            opacity: 0;
+            animation: fadeInText 3s forwards;
+        }
+
+        /* 按鈕動畫 */
+        .enter {
+            padding: 10px 20px;
+            background-color: #f0a500;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            z-index: 2; /* 確保按鈕層級在其他內容之上 */
+            position: absolute; /* 使用絕對定位確保按鈕固定 */
+            bottom: 20px; /* 固定按鈕距離頁面底部的距離 */
+            left: 50%;
+            transform: translateX(-50%); /* 使按鈕水平居中 */
+        }
+
+        .enter:hover {
+            background-color: #d87d00;
+            transform: scale(1.1);
+        }
+
+        /* 烟泡泡 */
+        .bubbles {
+            position: absolute;
+            top: 50%;  /* 起始位置在頁面中間 */
+            left: 50%;
+            transform: translate(-50%, -50%); /* 中央定位 */
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            pointer-events: none;
+            opacity: 0.6;
+            z-index: 0;
+        }
+
+        .bubbles img {
+            width: 100px;
+            height: 60px;
+            margin: 10px;
+            animation: bubbleMovement 4s ease-in-out infinite, bubbleFloat 8s ease-in-out infinite, bubbleRotation 12s linear infinite;
+        }
+          /* 自訂泡泡動畫效果 */
+          @keyframes bubbleMovement {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1000px) scale(2); /* 向上移動並放大 */
+                opacity: 0;
+            }
+        }
+
+        @keyframes bubbleFloat {
+            0% {
+                transform: translateX(0); /* 初始位置 */
+            }
+            50% {
+                transform: translateX(-20px); /* 向左漂浮 */
+            }
+            100% {
+                transform: translateX(80px); /* 向右漂浮 */
+            }
+        }
+
+        @keyframes bubbleRotation {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* 蛋糕圖文框 */
+        .cake-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+            border-radius: 10px;
+            width: 80%;
+            margin: 40px auto;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+            position: relative;
+            z-index: 2; /* 确保蛋糕框在其他内容之上 */
+        }
+
+        .cake-box:hover {
+            transform: scale(1.05);
+        }
+
+        .cake-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-right: 20px;
+        }
+
+        .cake-description {
+            font-size: 18px;
+            color: #333;
+            line-height: 1.5;
+            max-width: 500px;
+        }
+
+        /* 文字淡入動畫 */
+        .cake-description {
+            opacity: 0;
+            animation: fadeInText 3s forwards;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInText {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* 響應式設計 */
+        @media only screen and (max-width: 800px) {
+            .content {
+                margin-top: 30px;
+            }
+
+            h4 {
+                font-size: 20px;
+            }
+
+            .enter {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+
+            .cake-box {
+                flex-direction: column;
+                width: 90%;
+            }
+
+            .cake-image {
+                width: 150px;
+                height: 150px;
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+
+            .cake-description {
+                font-size: 16px;
+            }
+
+            /* 改變手機版背景顏色 */
+            body {
+                background-color: #c38902; /* 更改為手機版背景顏色 */
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- 內容 -->
+    <div class="content">
+        <h4>歡迎來到</h4>
+        <h4>“咖啡美寓”</h4>
+        <button class="enter">休息片刻</button>
+    </div>
+    
+    <!-- 烟泡泡 -->
+    <div class="bubbles">
+        <img src="images/bubble.png" alt="煙泡泡">
+        <img src="images/bubble.png" alt="煙泡泡">
+        <img src="images/bubble.png" alt="煙泡泡">
+        <img src="images/bubble.png" alt="煙泡泡">
+        <img src="images/bubble.png" alt="煙泡泡">
+        <img src="images/bubble.png" alt="煙泡泡">
+        <img src="images/bubble.png" alt="煙泡泡">
+        <img src="images/bubble.png" alt="煙泡泡">
+        <img src="images/bubble.png" alt="煙泡泡">
+        <img src="images/bubble.png" alt="煙泡泡">
+        <img src="images/bubble.png" alt="煙泡泡">
+        <img src="images/bubble.png" alt="煙泡泡">
+    </div>
+
+    <!-- 蛋糕圖文框 -->
+    <div class="cake-box">
+        <img src="images/lemon cake.png" alt="蛋糕圖片" class="cake-image">
+        <div class="cake-description">
+            <h3>輕檸蛋糕</h3>
+            <p>檸檬蛋糕起源於南法小鎮『蒙頓』<br>採用新鮮檸檬、日本三溫糖，可增加蛋糕體的保濕性、口感濕潤綿密~
+                <br>層層驚喜、層層美味，每一口~都充滿幸福感。</p>
+        </div>
+    </div>
+</body>
+</html>
