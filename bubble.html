@@ -56,7 +56,7 @@
         }
 
         .enter:hover {
-            background-color: #d87d00;
+            background-color: #fcf801;
             transform: scale(1.1);
         }
 
@@ -76,7 +76,7 @@
 
         .bubbles img {
             width: 100px;
-            height: 50px;
+            height: 60px;
             margin: 10px;
             animation: bubbleMovement 8s ease-in-out infinite, bubbleFloat 8s ease-in-out infinite, bubbleRotation 12s linear infinite;
         }
@@ -119,12 +119,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #ffffff;
-            border-radius: 20px;
+            background-color: #fff;
+            border-radius: 10px;
             width: 80%;
-            margin: 40px auto;
+            max-width: 600px; /* 限制最大寬度 */
+            margin: 20px auto 40px auto; /* 上移蛋糕框，並增加下方間距 */
             padding: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.841);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease-in-out;
             position: relative;
             z-index: 1; /* 調整蛋糕框的層級，讓它位於按鈕和內容之下 */
@@ -140,11 +141,12 @@
             object-fit: cover;
             border-radius: 10px;
             margin-right: 20px;
+            margin-top: 10px; /* 將圖片上移 */
         }
 
         .cake-description {
-            font-size: 16px;
-            color: #613401;
+            font-size: 18px;
+            color: #333;
             line-height: 1.5;
             max-width: 500px;
         }
@@ -173,6 +175,24 @@
             }
         }
 
+        /* 關閉按鈕 */
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #f44336;
+            border: none;
+            color: white;
+            font-size: 18px;
+            padding: 5px 10px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            background-color: #d32f2f;
+        }
+
         /* 響應式設計 */
         @media only screen and (max-width: 800px) {
             .content {
@@ -190,7 +210,10 @@
 
             .cake-box {
                 flex-direction: column;
-                width: 90%;
+                width: 90%; /* 在手機版上使用更小的寬度 */
+                max-width: none; /* 取消最大寬度限制 */
+                margin: 20px auto;
+                padding: 15px;
             }
 
             .cake-image {
@@ -198,6 +221,7 @@
                 height: 150px;
                 margin-right: 0;
                 margin-bottom: 15px;
+                margin-top: -30px; /* 在手機版上移動圖片 */
             }
 
             .cake-description {
@@ -206,7 +230,7 @@
 
             /* 改變手機版背景顏色 */
             body {
-                background-color: #e9ac05; /* 更改為手機版背景顏色 */
+                background-color: #ac6603; /* 更改為手機版背景顏色 */
             }
         }
 
@@ -239,6 +263,7 @@
 
     <!-- 蛋糕圖文框 -->
     <div class="cake-box">
+        <button class="close-btn" onclick="closeCakeBox()">×</button> <!-- 關閉按鈕 -->
         <img src="images/lemon cake.png" alt="蛋糕圖片" class="cake-image">
         <div class="cake-description">
             <h3>輕檸蛋糕</h3>
@@ -246,5 +271,11 @@
                 <br>層層驚喜，層層美味，每一口~都充滿幸福感。</p>
         </div>
     </div>
+
+    <script>
+        function closeCakeBox() {
+            document.querySelector('.cake-box').style.display = 'none'; // 隱藏蛋糕框
+        }
+    </script>
 </body>
 </html>
