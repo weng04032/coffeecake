@@ -19,7 +19,7 @@ body {
         width: 100%; /* 設置為 100%，讓其佔滿整個螢幕寬度 */
         height: 100vh; /* 設定高度為 100% 視窗高度 */
         background-image: url(images/coffee.png);
-        background-size: contain;  /* 背景圖片會完全顯示，保持比例 */
+        background-size: cover;  /* 背景圖片會完全顯示，保持比例 */
     background-position: center; /* 背景圖片居中 */
     background-repeat: no-repeat; /* 背景圖片不重複 */
     background-color: rgba(213, 151, 6, 0.973); /* 設定背景顏色，當圖片無法填滿容器時顯示此顏色 */
@@ -126,9 +126,67 @@ body {
 .bubbles img:nth-child(10) {
     animation-delay: 1s;
 }
-.bubbles img:nth-child(11) {
-    animation-delay: 0.5s;
+
+/* 右側營業項目下拉選單 */
+.business-dropdown {
+    position: fixed;
+    right: 20px;
+    top: 100px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 9999; /* 確保選單在最上層 */
 }
-.bubbles img:nth-child(12) {
-    animation-delay: 4s;
+
+/* 確保 select 元素有足夠的可操作區域 */
+.business-dropdown select {
+    font-size: 16px;
+    padding: 10px;
+    width: 200px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    z-index: 10000; /* 確保 select 在最上層 */
+}
+
+/* 手機版樣式調整 */
+@media only screen and (max-width: 800px) {
+    body {
+        overflow: auto; /* 許可橫向或縱向滾動，避免被 overflow: hidden 遮擋 */
+    }
+
+    .business-dropdown select {
+        width: 120px; /* 更適合手機的寬度 */
+        font-size: 14px; /* 更小的字型 */
+        padding: 6px; /* 增加內邊距，方便觸控 */
+    }
+
+    .business-dropdown {
+        top: 40px; /* 調整位置以免選單與其他內容重疊 */
+        z-index: 9999; /* 確保選單位於最上層 */
+}
+
+
+/* 選單文字使用草寫字體 */
+.business-dropdown select {
+    font-size: 16px;
+    padding: 10px;
+    width: 200px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: 'Dancing Script', cursive; /* 設定草寫字體 */
+}
+
+/* hover 時背景顏色變化 */
+.business-dropdown select:hover {
+    background-color: #bf5e03;
+    color: #fff;
 }

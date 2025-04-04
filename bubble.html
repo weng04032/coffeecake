@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>咖啡美寓</title>
-    
-    <!-- 連接CSS -->
+      
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="bubble.css">
 
     <style>
@@ -17,19 +17,69 @@
 
         body {
             font-family: Arial, sans-serif;
-            overflow: hidden; /* 防止出現滾動條 */
             background-color: #f7f7f7;
+            /* 移除 overflow: hidden，允許滾動 */
         }
 
-        /* 內容區域 */
+        .business-dropdown {
+            position: fixed;
+            right: 20px;
+            top: 100px;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 9999; /* 調整 z-index 確保選單在最上層 */
+        }
+
+        .business-dropdown select {
+            font-size: 16px;
+            padding: 10px;
+            width: 200px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+            color: #333;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .business-dropdown select:hover {
+            background-color: #bf5e03;
+            color: #fff;
+        }
+
+        .social-buttons {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-buttons a {
+            text-decoration: none;
+        }
+
+        .social-buttons img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        .social-buttons img:hover {
+            transform: scale(1.1);
+        }
+
         .content {
             text-align: center;
             margin-top: 50px;
             opacity: 0;
             animation: fadeIn 2s forwards;
-            z-index: 2; /* 提高這個層級，讓它顯示在蛋糕圖文框上面 */
+            z-index: 2;
             position: relative;
-            padding-bottom: 100px; /* 增加下方空間，避免按鈕被遮擋 */
+            padding-bottom: 100px;
         }
 
         h4 {
@@ -39,69 +89,66 @@
             animation: fadeInText 3s forwards;
         }
 
-        /* 按鈕動畫 */
         .enter {
             padding: 10px 20px;
-            background-color: #f0a500;
+            background-color: #fc870a;
             border: none;
             color: white;
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s, transform 0.3s;
-            z-index: 3; /* 確保按鈕層級在其他內容之上 */
-            position: absolute; /* 使用絕對定位確保按鈕固定 */
-            bottom: 20px; /* 固定按鈕距離頁面底部的距離 */
+            z-index: 3;
+            position: absolute;
+            bottom: 20px;
             left: 50%;
-            transform: translateX(-50%); /* 使按鈕水平居中 */
+            transform: translateX(-50%);
         }
 
         .enter:hover {
-            background-color: #fcf801;
+            background-color: #f5e145;
             transform: scale(1.1);
         }
 
-        /* 烟泡泡 */
         .bubbles {
             position: absolute;
-            top: 50%;  /* 起始位置在頁面中間 */
+            top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%); /* 中央定位 */
+            transform: translate(-50%, -50%);
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             pointer-events: none;
             opacity: 0.6;
-            z-index: 1; /* 調整泡泡的層級，確保它在背景 */
+            z-index: 1;
         }
 
         .bubbles img {
             width: 100px;
-            height: 60px;
+            height: 80px;
             margin: 10px;
             animation: bubbleMovement 8s ease-in-out infinite, bubbleFloat 8s ease-in-out infinite, bubbleRotation 12s linear infinite;
         }
 
-        /* 自訂泡泡動畫效果 */
         @keyframes bubbleMovement {
             0% {
                 transform: translateY(0) scale(1);
                 opacity: 1;
             }
             100% {
-                transform: translateY(-1000px) scale(2); /* 向上移動並放大 */
+                transform: translateY(-1000px) scale(2);
                 opacity: 0;
             }
         }
 
         @keyframes bubbleFloat {
             0% {
-                transform: translateX(0); /* 初始位置 */
+                transform: translateX(0px);
             }
             50% {
-                transform: translateX(-50px); /* 向左漂浮 */
+                transform: translateX(-20px);
             }
             100% {
-                transform: translateX(50px); /* 向右漂浮 */
+                transform: translateX(80px);
             }
         }
 
@@ -114,7 +161,6 @@
             }
         }
 
-        /* 蛋糕圖文框 */
         .cake-box {
             display: flex;
             justify-content: center;
@@ -122,13 +168,13 @@
             background-color: #fff;
             border-radius: 10px;
             width: 80%;
-            max-width: 600px; /* 限制最大寬度 */
-            margin: 20px auto 40px auto; /* 上移蛋糕框，並增加下方間距 */
+            max-width: 600px;
+            margin: 20px auto 40px auto;
             padding: 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease-in-out;
             position: relative;
-            z-index: 1; /* 調整蛋糕框的層級，讓它位於按鈕和內容之下 */
+            z-index: 1;
         }
 
         .cake-box:hover {
@@ -141,7 +187,7 @@
             object-fit: cover;
             border-radius: 10px;
             margin-right: 20px;
-            margin-top: 10px; /* 將圖片上移 */
+            margin-top: 10px;
         }
 
         .cake-description {
@@ -151,7 +197,6 @@
             max-width: 500px;
         }
 
-        /* 文字淡入動畫 */
         .cake-description {
             opacity: 0;
             animation: fadeInText 3s forwards;
@@ -170,30 +215,15 @@
             0% {
                 opacity: 0;
             }
+            50% {
+                opacity: 2;
+            }
             100% {
                 opacity: 1;
             }
         }
 
-        /* 關閉按鈕 */
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: #f44336;
-            border: none;
-            color: white;
-            font-size: 18px;
-            padding: 5px 10px;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-
-        .close-btn:hover {
-            background-color: #d32f2f;
-        }
-
-        /* 響應式設計 */
+        /* 手機版樣式調整 */
         @media only screen and (max-width: 800px) {
             .content {
                 margin-top: 30px;
@@ -210,8 +240,8 @@
 
             .cake-box {
                 flex-direction: column;
-                width: 90%; /* 在手機版上使用更小的寬度 */
-                max-width: none; /* 取消最大寬度限制 */
+                width: 90%;
+                max-width: none;
                 margin: 20px auto;
                 padding: 15px;
             }
@@ -221,61 +251,107 @@
                 height: 150px;
                 margin-right: 0;
                 margin-bottom: 15px;
-                margin-top: -30px; /* 在手機版上移動圖片 */
+                margin-top: -30px;
             }
 
             .cake-description {
                 font-size: 16px;
             }
 
-            /* 改變手機版背景顏色 */
-            body {
-                background-color: #ac6603; /* 更改為手機版背景顏色 */
+             /* 使用圖片作為手機版背景 */
+        body {
+            background-image: url(images/coffe\ h.png);請替換成你的圖片路徑 */
+            background-size: cover; /* 背景圖片填滿整個畫面 */
+            background-position: center; /* 使背景圖片居中 */
+            background-attachment: fixed; /* 固定背景，當頁面滾動時背景不會移動 */
+            }
+
+            /* 手機版關閉按鈕樣式 */
+            .close-btn {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                font-size: 30px;
+                color: #000;
+                background: none;
+                border: none;
+                cursor: pointer;
+                z-index: 3; /* 確保按鈕在最上層 */
+            }
+
+            .close-btn:hover {
+                color: #fc870a; /* 懸停時改變顏色 */
             }
         }
-
     </style>
 </head>
 
 <body>
+    <!-- 右側營業項目下拉選單 -->
+    <div class="business-dropdown">
+        <label for="businessSelect">菜單</label>
+        <select id="businessSelect">
+            <option value="coffee">精選咖啡Coffee</option>
+            <option value="cake">風味飲品FLAVORED Drink</option>
+            <option value="lunch">輕食Snack</option>
+            <option value="juice">鬆餅Waffle</option>
+            <option value="tea">訂位Book a table</option>
+            <option value="takeaway">外帶Takeaway</option>
+        </select>
+    </div>
+
     <!-- 內容 -->
     <div class="content">
         <h4>歡迎來到</h4>
         <h4>“咖啡美寓”</h4>
-        <button class="enter">休息片刻</button>
+        <button class="enter">放鬆時刻</button>
     </div>
     
     <!-- 烟泡泡 -->
     <div class="bubbles">
         <img src="images/bubble.png" alt="煙泡泡">
-        <img src="images/bubble.png" alt="煙泡泡">
-        <img src="images/bubble.png" alt="煙泡泡">
-        <img src="images/bubble.png" alt="煙泡泡">
-        <img src="images/bubble.png" alt="煙泡泡">
-        <img src="images/bubble.png" alt="煙泡泡">
-        <img src="images/bubble.png" alt="煙泡泡">
-        <img src="images/bubble.png" alt="煙泡泡">
-        <img src="images/bubble.png" alt="煙泡泡">
-        <img src="images/bubble.png" alt="煙泡泡">
-        <img src="images/bubble.png" alt="煙泡泡">
-        <img src="images/bubble.png" alt="煙泡泡">
+        <!-- 更多泡泡 -->
     </div>
 
     <!-- 蛋糕圖文框 -->
     <div class="cake-box">
-        <button class="close-btn" onclick="closeCakeBox()">×</button> <!-- 關閉按鈕 -->
+        <button class="close-btn" onclick="closeCakeBox()">×</button>
         <img src="images/lemon cake.png" alt="蛋糕圖片" class="cake-image">
         <div class="cake-description">
             <h3>輕檸蛋糕</h3>
-            <p>檸檬蛋糕起源於南法小鎮『蒙頓』<br>採用新鮮檸檬、日本三溫糖、法國奶油，<br>可增加蛋糕體的保濕性、口感濕潤綿密~
-                <br>層層驚喜，層層美味，每一口~都充滿幸福感。</p>
+            <p>檸檬蛋糕起源於南法小鎮『蒙頓』<br>採用新鮮檸檬、日本三溫糖、法國奶油，<br>可增加蛋糕體的保濕性、口感濕潤綿密~</p>
         </div>
+    </div>
+
+    <!-- 社交媒體按鈕 -->
+    <div class="social-buttons">
+        <!-- Facebook 和 LINE 按鈕 -->
     </div>
 
     <script>
         function closeCakeBox() {
-            document.querySelector('.cake-box').style.display = 'none'; // 隱藏蛋糕框
+            document.querySelector('.cake-box').style.display = 'none';
         }
     </script>
+</body>
+</html>
+<!-- 社交媒體按鈕 -->
+<div class="social-buttons">
+    <!-- Facebook 按鈕 -->
+    <a href="https://www.facebook.com/yourpage" target="_blank">
+        <img src="images/fbicon.png" alt="Facebook">
+    </a>
+
+    <!-- LINE 按鈕 -->
+    <a href="https://www.instagram.com/accounts/password/reset/" target="_blank">
+        <img src="images/line icon.png" alt="LINE">
+    </a>
+</div>
+
+<script>
+    function closeCakeBox() {
+        document.querySelector('.cake-box').style.display = 'none'; // 隱藏蛋糕框
+    }
+</script>
 </body>
 </html>
