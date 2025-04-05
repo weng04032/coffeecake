@@ -18,20 +18,82 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #f7f7f7;
-            /* 移除 overflow: hidden，允許滾動 */
         }
 
-        .business-dropdown {
-            position: fixed;
-            right: 20px;
-            top: 100px;
-            background-color: #fff;
-            padding: 10px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            z-index: 9999; /* 調整 z-index 確保選單在最上層 */
+        /* 桌機版背景緩慢放大 */
+        @keyframes desktopBackgroundZoom {
+            0% {
+                background-image: url(images/coffee2.png);
+                transform: scale(1);
+            }
+            33% {
+                background-image: url(images/coffee3.png);
+                transform: scale(1.05);
+            }
+            66% {
+                background-image: url(images/coffee4.png);
+                transform: scale(1.1);
+            }
+            100% {
+                background-image: url(images/coffee5.png);
+                transform: scale(1);
+            }
         }
 
+        /* 設置桌機版背景放大動畫 */
+        @media only screen and (min-width: 801px) {
+            body {
+                animation: desktopBackgroundZoom 20s infinite;
+                background-size: cover;
+                background-position: center;
+                background-attachment: fixed;
+                transition: background-size 0.5s ease-in-out; /* 平滑過渡 */
+            }
+
+            .business-dropdown {
+                position: fixed;
+                right: 10px;
+                top: 120px;
+                background-color: #fff;
+                padding: 10px;
+                border-radius: 10px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                z-index: 9999;
+            }
+        }
+
+        /* 手機版背景緩慢放大 */
+        @keyframes mobileBackgroundZoom {
+            0% {
+                background-image: url(images/coffeeh2.png);
+                transform: scale(1);
+            }
+            33% {
+                background-image: url(images/coffeeh3.png);
+                transform: scale(1.05);
+            }
+            66% {
+                background-image: url(images/coffeeh4.png);
+                transform: scale(1.1);
+            }
+            100% {
+                background-image: url(images/coffeeh5.png);
+                transform: scale(1);
+            }
+        }
+
+        /* 設置手機版背景放大動畫 */
+        @media only screen and (max-width: 800px) {
+            body {
+                animation: mobileBackgroundZoom 20s infinite;
+                background-size: cover;
+                background-position: center;
+                background-attachment: fixed;
+                transition: background-size 0.5s ease-in-out; /* 平滑過渡 */
+            }
+        }
+
+        /* 其他樣式保持不變 */
         .business-dropdown select {
             font-size: 16px;
             padding: 10px;
@@ -45,7 +107,7 @@
         }
 
         .business-dropdown select:hover {
-            background-color: #bf5e03;
+            background-color: #f47906;
             color: #fff;
         }
 
@@ -55,6 +117,7 @@
             right: 20px;
             display: flex;
             gap: 20px;
+            z-index: 9999; /* 確保社交媒體按鈕位於最上層 */
         }
 
         .social-buttons a {
@@ -72,11 +135,11 @@
             transform: scale(1.1);
         }
 
+        /* 去除文字動畫 */
         .content {
             text-align: center;
             margin-top: 50px;
-            opacity: 0;
-            animation: fadeIn 2s forwards;
+            opacity: 1; /* 取消動畫效果 */
             z-index: 2;
             position: relative;
             padding-bottom: 100px;
@@ -85,8 +148,7 @@
         h4 {
             font-size: 24px;
             margin-bottom: 10px;
-            opacity: 0;
-            animation: fadeInText 3s forwards;
+            opacity: 1; /* 取消動畫效果 */
         }
 
         .enter {
@@ -165,7 +227,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #fff;
+            background-color: rgba(255, 255, 255, 0.8); /* 設置為透明白色，透明度為 0.8 */
             border-radius: 10px;
             width: 80%;
             max-width: 600px;
@@ -174,11 +236,12 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease-in-out;
             position: relative;
-            z-index: 1;
+            z-index: 10000; /* 確保蛋糕框位於最上層 */
         }
 
         .cake-box:hover {
             transform: scale(1.05);
+            
         }
 
         .cake-image {
@@ -191,7 +254,7 @@
         }
 
         .cake-description {
-            font-size: 18px;
+            font-size: 16px;
             color: #333;
             line-height: 1.5;
             max-width: 500px;
@@ -200,6 +263,21 @@
         .cake-description {
             opacity: 0;
             animation: fadeInText 3s forwards;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            background: none;
+            border: none;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            color: #fc870a;
         }
 
         @keyframes fadeIn {
@@ -257,31 +335,6 @@
             .cake-description {
                 font-size: 16px;
             }
-
-             /* 使用圖片作為手機版背景 */
-        body {
-            background-image: url(images/coffe\ h.png);請替換成你的圖片路徑 */
-            background-size: cover; /* 背景圖片填滿整個畫面 */
-            background-position: center; /* 使背景圖片居中 */
-            background-attachment: fixed; /* 固定背景，當頁面滾動時背景不會移動 */
-            }
-
-            /* 手機版關閉按鈕樣式 */
-            .close-btn {
-                position: absolute;
-                top: 10px;
-                right: 10px;
-                font-size: 30px;
-                color: #000;
-                background: none;
-                border: none;
-                cursor: pointer;
-                z-index: 3; /* 確保按鈕在最上層 */
-            }
-
-            .close-btn:hover {
-                color: #fc870a; /* 懸停時改變顏色 */
-            }
         }
     </style>
 </head>
@@ -289,14 +342,14 @@
 <body>
     <!-- 右側營業項目下拉選單 -->
     <div class="business-dropdown">
-        <label for="businessSelect">菜單</label>
+        <label for="businessSelect"></label>
         <select id="businessSelect">
-            <option value="coffee">精選咖啡Coffee</option>
-            <option value="cake">風味飲品FLAVORED Drink</option>
-            <option value="lunch">輕食Snack</option>
-            <option value="juice">鬆餅Waffle</option>
-            <option value="tea">訂位Book a table</option>
-            <option value="takeaway">外帶Takeaway</option>
+            <option value="coffee">精選咖啡 Coffee</option>
+            <option value="cake">風味飲品 Flavored Drink</option>
+            <option value="lunch">輕食 Snack</option>
+            <option value="juice">鬆餅 Waffle</option>
+            <option value="tea">訂位 Book a table</option>
+            <option value="takeaway">外帶 Takeaway</option>
         </select>
     </div>
 
@@ -318,40 +371,27 @@
         <button class="close-btn" onclick="closeCakeBox()">×</button>
         <img src="images/lemon cake.png" alt="蛋糕圖片" class="cake-image">
         <div class="cake-description">
-            <h3>輕檸蛋糕</h3>
-            <p>檸檬蛋糕起源於南法小鎮『蒙頓』<br>採用新鮮檸檬、日本三溫糖、法國奶油，<br>可增加蛋糕體的保濕性、口感濕潤綿密~</p>
+            <h3>新品推薦_輕檸蛋糕</h3>
+            <p><BR>檸檬蛋糕起源於南法小鎮『蒙頓』，<br>採用新鮮檸檬、日本三溫糖、法國奶油，<br>可增加蛋糕體的保濕性、口感濕潤綿密~</p>
         </div>
     </div>
 
     <!-- 社交媒體按鈕 -->
     <div class="social-buttons">
         <!-- Facebook 和 LINE 按鈕 -->
+        <a href="https://www.facebook.com/yourpage" target="_blank">
+            <img src="images/fbicon.png" alt="Facebook">
+        </a>
+
+        <a href="https://www.instagram.com/accounts/password/reset/" target="_blank">
+            <img src="images/line icon.png" alt="LINE">
+        </a>
     </div>
 
     <script>
         function closeCakeBox() {
-            document.querySelector('.cake-box').style.display = 'none';
+            document.querySelector('.cake-box').style.display = 'none'; // 隱藏蛋糕框
         }
     </script>
-</body>
-</html>
-<!-- 社交媒體按鈕 -->
-<div class="social-buttons">
-    <!-- Facebook 按鈕 -->
-    <a href="https://www.facebook.com/yourpage" target="_blank">
-        <img src="images/fbicon.png" alt="Facebook">
-    </a>
-
-    <!-- LINE 按鈕 -->
-    <a href="https://www.instagram.com/accounts/password/reset/" target="_blank">
-        <img src="images/line icon.png" alt="LINE">
-    </a>
-</div>
-
-<script>
-    function closeCakeBox() {
-        document.querySelector('.cake-box').style.display = 'none'; // 隱藏蛋糕框
-    }
-</script>
 </body>
 </html>
