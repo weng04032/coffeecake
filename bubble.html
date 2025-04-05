@@ -86,8 +86,8 @@
         @media only screen and (max-width: 800px) {
             body {
                 animation: mobileBackgroundZoom 20s infinite;
-                background-size: cover;
-                background-position: center;
+                background-size: cover; /* 保持圖片不變形並充滿視窗 */
+                background-position: center center;
                 background-attachment: fixed;
                 transition: background-size 0.5s ease-in-out; /* 平滑過渡 */
             }
